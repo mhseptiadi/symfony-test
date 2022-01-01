@@ -4,8 +4,8 @@ namespace Console\Classes;
 
 class DiscountClass
 {
-    public $items;
-    public $discounts;
+    private $items;
+    private $discounts;
     private $price;
 
     function __construct($items, $discounts) {
@@ -13,32 +13,30 @@ class DiscountClass
         $this->discounts = $discounts;
     }
 
-    function getDiscountPrice(): float {
-        $price = 0;
+    public function getDiscountPrice(): float {
+        $this->price = 0;
         foreach ($this->items as $item) {
-            $price += $item->quantity * $item->unit_price;
+            $this->price += $item->quantity * $item->unit_price;
         }
 
         usort($this->discounts, array($this, 'priority'));
 
-        $price = $this->calculateDiscount($price, $this->discounts);
+        $this->calculateDiscount($this->discounts);
 
-        return $price;
+        return $this->price;
     }
 
-    private function calculateDiscount($price, $discounts): float {
+    private function calculateDiscount($discounts): void {
         foreach ($discounts as $discount) {
             switch ($discount->type) {
                 case 'PERCENTAGE':
-                    $price -= $price * $discount->value / 100;
+                    $this->price -= $this->price * $discount->value / 100;
                     break;
                 case 'DOLLAR':
-                    $price -= $discount->value;
+                    $this->price -= $discount->value;
                     break;
             }
         }
-
-        return $price;
     }
 
     private function priority($a, $b) {
