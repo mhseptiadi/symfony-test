@@ -21,7 +21,14 @@ class OrderService
         return $this->order;
     }
 
+    public function getDataArray(): OrderClass {
+        return $this->order;
+    }
+
     private function map(): void {
+        if (!$this->jsonObject) {
+            return;
+        }
         $this->order->order_id =  $this->jsonObject->order_id;
         $this->order->order_datetime = $this->jsonObject->order_date;
         $this->calculateDiscount();

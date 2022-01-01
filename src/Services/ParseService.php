@@ -13,13 +13,26 @@ class ParseService
     }
 
     private function process($dataArr): void {
-        $dataMapped = array_map(array($this, 'mapToOrder'), $dataArr);
-        print_r($dataMapped);
+        $dataMapped = array_map(array($this, 'mapToOrder'), array_filter($dataArr));
+        $this->toCsv($dataMapped);
+//        print_r(($dataMapped));
     }
 
     private function mapToOrder($data): OrderClass {
         $jsonObject = json_decode($data);
         $order = new OrderService($jsonObject);
         return $order->getData();
+    }
+
+    private function toCsv($dataMapped): void {
+        $out = 'out.csv';
+
+        $fp = fopen($out, 'w');
+        foreach ($dataMapped as $fields) {
+            if ($fields->total_order_value > 0) {
+                fputcsv($fp, (array) $fields);
+            }
+        }
+        fclose($fp);
     }
 }
