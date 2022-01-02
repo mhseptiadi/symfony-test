@@ -32,11 +32,11 @@ class ParseService
                 break;
             case $save === 'xml':
                 $this->toXml($dataMapped);
-                $file = 'out.xml';
+                $file = 'default-out.xml';
                 break;
             case $save === 'jsonl':
                 $this->toJsonl($dataMapped);
-                $file = 'out.jsonl';
+                $file = 'default-out.jsonl';
                 break;
             default:
                 $this->toCsv($dataMapped);
@@ -86,7 +86,7 @@ class ParseService
     private function toJsonl($dataMapped): void
     {
         echo "save to jsonl \n";
-        $out = 'out.jsonl';
+        $out = 'default-out.jsonl';
         $fp = fopen($out, 'w');
         foreach ($dataMapped as $fields) {
             if ($fields->total_order_value > 0) {
@@ -109,7 +109,7 @@ class ParseService
         $xmlContent = $serializer->serialize($dataMapped, 'xml');
 
         echo "save to xml \n";
-        $out = 'out.xml';
+        $out = 'default-out.xml';
         $fp = fopen($out, 'w');
         fputs($fp, $xmlContent);
         fclose($fp);

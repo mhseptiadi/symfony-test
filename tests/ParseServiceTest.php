@@ -9,9 +9,9 @@ class ParseServiceTest extends TestCase
     {
         @unlink('out.csv');
         $parser = new ParseService();
-        $parser->parse('./tests/data/default.jsonl', '', '');
+        $parser->parse('./tests/data/input.jsonl', '', '');
         $data = file_get_contents('out.csv');
-        $checkData = file_get_contents('./tests/data/default.csv');
+        $checkData = file_get_contents('./tests/data/default-out.csv');
         $this->assertNotEmpty($data);
         $this->assertEquals(
             str_replace(["\r\n", "\n"], "", $data),
@@ -21,11 +21,11 @@ class ParseServiceTest extends TestCase
 
     public function testParseSaveToXml()
     {
-        @unlink('out.xml');
+        @unlink('default-out.xml');
         $parser = new ParseService();
-        $parser->parse('./tests/data/default.jsonl', '', '', 'xml');
-        $data = file_get_contents('out.xml');
-        $checkData = file_get_contents('./tests/data/out.xml');
+        $parser->parse('./tests/data/input.jsonl', '', '', 'xml');
+        $data = file_get_contents('default-out.xml');
+        $checkData = file_get_contents('./tests/data/default-out.xml');
         $this->assertNotEmpty($data);
         $this->assertEquals(
             str_replace(["\r\n", "\n"], "", $data),
@@ -35,11 +35,11 @@ class ParseServiceTest extends TestCase
 
     public function testParseSaveToJsonl()
     {
-        @unlink('out.jsonl');
+        @unlink('default-out.jsonl');
         $parser = new ParseService();
-        $parser->parse('./tests/data/default.jsonl', '', '', 'jsonl');
-        $data = file_get_contents('out.jsonl');
-        $checkData = file_get_contents('./tests/data/out.jsonl');
+        $parser->parse('./tests/data/input.jsonl', '', '', 'jsonl');
+        $data = file_get_contents('default-out.jsonl');
+        $checkData = file_get_contents('./tests/data/default-out.jsonl');
         $this->assertNotEmpty($data);
         $this->assertEquals(
             str_replace(["\r\n", "\n"], "", $data),
@@ -51,7 +51,7 @@ class ParseServiceTest extends TestCase
     {
         @unlink('out.csv');
         $parser = new ParseService();
-        $parser->parse('./tests/data/default.jsonl', 'customer_state', 'asc');
+        $parser->parse('./tests/data/input.jsonl', 'customer_state', 'asc');
         $data = file_get_contents('out.csv');
         $checkData = file_get_contents('./tests/data/sortAsc.csv');
         $this->assertNotEmpty($data);
@@ -65,7 +65,7 @@ class ParseServiceTest extends TestCase
     {
         @unlink('out.csv');
         $parser = new ParseService();
-        $parser->parse('./tests/data/default.jsonl', 'customer_state', 'desc');
+        $parser->parse('./tests/data/input.jsonl', 'customer_state', 'desc');
         $data = file_get_contents('out.csv');
         $checkData = file_get_contents('./tests/data/sortDesc.csv');
         $this->assertNotEmpty($data);
