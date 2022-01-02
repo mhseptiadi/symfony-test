@@ -31,10 +31,17 @@ class ParserCommand extends Command
             )
             ->addOption(
                 'sort-direction',
-                's',
+                'd',
                 InputOption::VALUE_OPTIONAL,
                 'Sorting direction',
                 'asc'
+            )
+            ->addOption(
+                'save-as',
+                's',
+                InputOption::VALUE_OPTIONAL,
+                'Save file as csv, xml or jsonl',
+                'csv'
             )
             ->addOption(
                 'email',
@@ -51,9 +58,10 @@ class ParserCommand extends Command
         $field = $input->getOption('sort-field');
         $sort = $input->getOption('sort-direction');
         $email = $input->getOption('email');
+        $save = $input->getOption('save-as');
 
         $parser = new ParseService();
-        $parser->parse($url, $field, $sort, $email);
+        $parser->parse($url, $field, $sort, $save, $email);
 
         return Command::SUCCESS;
     }

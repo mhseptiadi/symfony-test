@@ -26,19 +26,20 @@ Usage:
   jsonl-parse [options]
 
 Options:
-  -u, --url[=URL]                        Url where jsonl file comes from [default: "https://s3-ap
--southeast-2.amazonaws.com/catch-code-challenge/challenge-1-in.jsonl"]
+  -u, --url[=URL]                        Url where jsonl file comes from [default: "https://s3-ap-s
+outheast-2.amazonaws.com/catch-code-challenge/challenge-1-in.jsonl"]
   -f, --sort-field[=SORT-FIELD]          Sorting the field [default: ""]
-  -s, --sort-direction[=SORT-DIRECTION]  Sorting direction [default: "asc"]
+  -d, --sort-direction[=SORT-DIRECTION]  Sorting direction [default: "asc"]
+  -s, --save-as[=SAVE-AS]                Save file as csv, xml or jsonl [default: "csv"]
   -e, --email[=EMAIL]                    Sending file to email [default: ""]
-  -h, --help                             Display help for the given command. When no command is g
-iven display help for the list command
+  -h, --help                             Display help for the given command. When no command is giv
+en display help for the list command
   -q, --quiet                            Do not output any message
   -V, --version                          Display this application version
       --ansi|--no-ansi                   Force (or disable --no-ansi) ANSI output
   -n, --no-interaction                   Do not ask any interactive question
-  -v|vv|vvv, --verbose                   Increase the verbosity of messages: 1 for normal output,
- 2 for more verbose output and 3 for debug
+  -v|vv|vvv, --verbose                   Increase the verbosity of messages: 1 for normal output, 2
+ for more verbose output and 3 for debug
 
 Help:
   Parse a jsonl file from url

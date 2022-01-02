@@ -9,7 +9,7 @@
 /vendor/
 ###< symfony/framework-bundle ###
 
-out.csv
+out.*
 
 ###> symfony/phpunit-bridge ###
 .phpunit.result.cache

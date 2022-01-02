@@ -8,7 +8,7 @@ use Symfony\Component\Mime\Email;
 
 class EmailService
 {
-    public function sendEmail($to): void
+    public function sendEmail($to, $file): void
     {
         echo "sending email \n";
 
@@ -19,7 +19,7 @@ class EmailService
             ->from('test@example.com')
             ->to($to)
             ->subject('Order file result')
-            ->attachFromPath('./out.csv');
+            ->attachFromPath("./$file");
 
         $mailer->send($email);
     }
