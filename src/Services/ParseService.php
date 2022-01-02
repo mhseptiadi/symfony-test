@@ -6,17 +6,34 @@ use Console\Classes\OrderClass;
 
 class ParseService
 {
-    public function parse($url): void
+    public function parse($url, $field, $sort): void
     {
         $jsonl = file_get_contents($url);
         $dataArr = explode("\n", $jsonl);
-        $this->process($dataArr);
+        $this->process($dataArr, $field, $sort);
     }
 
-    private function process($dataArr): void
+    private function process($dataArr, $field, $sort): void
     {
         $dataMapped = array_map([$this, 'mapToOrder'], array_filter($dataArr));
+        if ($field) {
+            usort($dataMapped, $this->sort($field, $sort));
+        }
         $this->toCsv($dataMapped);
+    }
+
+    private function sort($field, $sort)
+    {
+        return function($a, $b) use ($field, $sort) {
+            if (!property_exists($a, $field)) {
+                $field = 'order_id';
+            }
+            if ($sort === 'desc') {
+                return strcmp($b->{$field}, $a->{$field});
+            } else {
+                return strcmp($a->{$field}, $b->{$field});
+            }
+        };
     }
 
     private function mapToOrder($data): OrderClass
