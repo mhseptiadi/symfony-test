@@ -10,9 +10,6 @@ symfony-test is a command line project to download jsonl file and parse it to cs
 - symfony https://symfony.com/doc/current/setup.html
 
 ### Installation
-
-
-### Locally, if you have PHP
 - clone from repo https://github.com/mhseptiadi/symfony-test
 - run `composer install`
 
