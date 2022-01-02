@@ -9,7 +9,7 @@ class ParseServiceTest extends TestCase
     {
         @unlink('out.csv');
         $parser = new ParseService();
-        $parser->parse('./tests/data/default.jsonl', '', '');
+        $parser->parse('./tests/data/default.jsonl', '', '', '');
         $data = file_get_contents('out.csv');
         $checkData = file_get_contents('./tests/data/default.csv');
         $this->assertNotEmpty($data);
@@ -23,7 +23,7 @@ class ParseServiceTest extends TestCase
     {
         @unlink('out.csv');
         $parser = new ParseService();
-        $parser->parse('./tests/data/default.jsonl', 'customer_state', 'asc');
+        $parser->parse('./tests/data/default.jsonl', 'customer_state', 'asc', '');
         $data = file_get_contents('out.csv');
         $checkData = file_get_contents('./tests/data/sortAsc.csv');
         $this->assertNotEmpty($data);
@@ -37,7 +37,7 @@ class ParseServiceTest extends TestCase
     {
         @unlink('out.csv');
         $parser = new ParseService();
-        $parser->parse('./tests/data/default.jsonl', 'customer_state', 'desc');
+        $parser->parse('./tests/data/default.jsonl', 'customer_state', 'desc', '');
         $data = file_get_contents('out.csv');
         $checkData = file_get_contents('./tests/data/sortDesc.csv');
         $this->assertNotEmpty($data);
@@ -51,7 +51,7 @@ class ParseServiceTest extends TestCase
     {
         @unlink('out.csv');
         $parser = new ParseService();
-        $parser->parse('./tests/data/zeroItem.jsonl', '', '');
+        $parser->parse('./tests/data/zeroItem.jsonl', '', '', '');
         $data = file_get_contents('out.csv');
         $this->assertEmpty($data);
     }
@@ -60,7 +60,7 @@ class ParseServiceTest extends TestCase
     {
         @unlink('out.csv');
         $parser = new ParseService();
-        $parser->parse('./tests/data/multipleDiscount.jsonl', '', '');
+        $parser->parse('./tests/data/multipleDiscount.jsonl', '', '', '');
         $data = file_get_contents('out.csv');
         $checkData = file_get_contents('./tests/data/multipleDiscount.csv');
         $this->assertNotEmpty($data);
@@ -75,7 +75,7 @@ class ParseServiceTest extends TestCase
         $this->expectExceptionMessage('Filename cannot be empty');
         $this->expectError();
         $parser = new ParseService();
-        $parser->parse('', '', '');
+        $parser->parse('', '', '', '');
     }
 
     public function testParseInvalidUrl()
@@ -83,6 +83,6 @@ class ParseServiceTest extends TestCase
         $this->expectExceptionMessage('failed to open stream: No such file or directory');
         $this->expectError();
         $parser = new ParseService();
-        $parser->parse('some-invalid-path', '', '');
+        $parser->parse('some-invalid-path', '', '', '');
     }
 }

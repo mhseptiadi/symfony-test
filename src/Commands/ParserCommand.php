@@ -33,8 +33,15 @@ class ParserCommand extends Command
                 'sort-direction',
                 's',
                 InputOption::VALUE_OPTIONAL,
-                'Sorting the field',
+                'Sorting direction',
                 'asc'
+            )
+            ->addOption(
+                'email',
+                'e',
+                InputOption::VALUE_OPTIONAL,
+                'Sending file to email',
+                ''
             );
     }
 
@@ -43,10 +50,11 @@ class ParserCommand extends Command
         $url = $input->getOption('url');
         $field = $input->getOption('sort-field');
         $sort = $input->getOption('sort-direction');
+        $email = $input->getOption('email');
 
         $parser = new ParseService();
-        $parser->parse($url, $field, $sort);
+        $parser->parse($url, $field, $sort, $email);
 
-        return 0;
+        return Command::SUCCESS;
     }
 }
