@@ -9,31 +9,36 @@ class UnitClass
     private $distinct_unit_count;
     private $total_units_count;
 
-    function __construct($items) {
+    public function __construct($items)
+    {
         $this->items = $items;
         $this->calculateAverageUnitPrice();
         $this->findDistinctUnitCount();
         $this->calculateTotalUnitCount();
     }
 
-    public function getAverageUnitPrice(): float {
+    public function getAverageUnitPrice(): float
+    {
         return $this->average_unit_price;
     }
 
-    public function getDistinctUnitCount(): float {
+    public function getDistinctUnitCount(): float
+    {
         return $this->distinct_unit_count;
     }
 
-    public function getTotalUnitCount(): float {
+    public function getTotalUnitCount(): float
+    {
         return $this->total_units_count;
     }
 
-    private function calculateAverageUnitPrice(): void {
+    private function calculateAverageUnitPrice(): void
+    {
         $price = 0;
         $count = 0;
         foreach ($this->items as $item) {
             $price += $item->unit_price;
-            $count++;
+            ++$count;
         }
 
         if ($count > 0) {
@@ -43,9 +48,12 @@ class UnitClass
         }
     }
 
-    private function findDistinctUnitCount(): void {
-        $items = array_map( function( $item ) { return $item->product->product_id; }, $this->items );
-        $uniqueItems = array_unique( $items );
+    private function findDistinctUnitCount(): void
+    {
+        $items = array_map(function ($item) {
+            return $item->product->product_id;
+        }, $this->items);
+        $uniqueItems = array_unique($items);
         $this->distinct_unit_count = count($uniqueItems);
     }
 

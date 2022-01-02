@@ -3,8 +3,10 @@
 use PHPUnit\Framework\TestCase;
 use Console\Classes\UnitClass;
 
-class UnitClassTest extends TestCase {
-    public function testUnit() {
+class UnitClassTest extends TestCase
+{
+    public function testUnit()
+    {
         $items = file_get_contents('./tests/data/items.json');
         $discountClass = new UnitClass(json_decode($items));
 
@@ -18,7 +20,8 @@ class UnitClassTest extends TestCase {
         $this->assertEquals(2, $totalUnitCount);
     }
 
-    public function testEmptyUnit() {
+    public function testEmptyUnit()
+    {
         $discountClass = new UnitClass(json_decode('[]'));
 
         $averageUnitPrice = $discountClass->getAverageUnitPrice();

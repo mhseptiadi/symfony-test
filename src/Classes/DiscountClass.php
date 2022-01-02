@@ -8,29 +8,32 @@ class DiscountClass
     private $discounts;
     private $price;
 
-    function __construct($items, $discounts) {
+    public function __construct($items, $discounts)
+    {
         $this->items = $items;
         $this->discounts = $discounts;
     }
 
-    public function getDiscountPrice(): float {
+    public function getDiscountPrice(): float
+    {
         $this->price = 0;
         foreach ($this->items as $item) {
             $this->price += $item->quantity * $item->unit_price;
         }
 
-        if ($this->price === 0) {
+        if (0 === $this->price) {
             return $this->price;
         }
 
-        usort($this->discounts, array($this, 'priority'));
+        usort($this->discounts, [$this, 'priority']);
 
         $this->calculateDiscount($this->discounts);
 
         return $this->price;
     }
 
-    private function calculateDiscount($discounts): void {
+    private function calculateDiscount($discounts): void
+    {
         foreach ($discounts as $discount) {
             switch ($discount->type) {
                 case 'PERCENTAGE':
@@ -43,7 +46,8 @@ class DiscountClass
         }
     }
 
-    private function priority($a, $b) {
+    private function priority($a, $b)
+    {
         return strcmp($a->priority, $b->priority);
     }
 }

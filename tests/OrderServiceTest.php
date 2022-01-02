@@ -3,8 +3,10 @@
 use PHPUnit\Framework\TestCase;
 use Console\Services\OrderService;
 
-class OrderServiceTest extends TestCase {
-    public function testOrder() {
+class OrderServiceTest extends TestCase
+{
+    public function testOrder()
+    {
         $inputOrder = file_get_contents('./tests/data/order.json');
         $orderService = new OrderService(json_decode($inputOrder));
         $order = $orderService->getData();
@@ -17,7 +19,8 @@ class OrderServiceTest extends TestCase {
         $this->assertEquals("VICTORIA", $order->customer_state);
     }
 
-    public function testInvalidOrder() {
+    public function testInvalidOrder()
+    {
         $this->expectExceptionMessage('Undefined property');
         $this->expectError();
 

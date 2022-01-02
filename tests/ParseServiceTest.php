@@ -3,8 +3,10 @@
 use PHPUnit\Framework\TestCase;
 use Console\Services\ParseService;
 
-class ParseServiceTest extends TestCase {
-    public function testParse() {
+class ParseServiceTest extends TestCase
+{
+    public function testParse()
+    {
         @unlink('default.csv');
         $parser = new ParseService();
         $parser->parse('./tests/data/default.jsonl');
@@ -14,7 +16,8 @@ class ParseServiceTest extends TestCase {
         $this->assertEquals($data, $checkData);
     }
 
-    public function testZeroItem() {
+    public function testZeroItem()
+    {
         @unlink('default.csv');
         $parser = new ParseService();
         $parser->parse('./tests/data/zeroItem.jsonl');
@@ -22,7 +25,8 @@ class ParseServiceTest extends TestCase {
         $this->assertEmpty($data);
     }
 
-    public function testMultipleDiscount() {
+    public function testMultipleDiscount()
+    {
         @unlink('default.csv');
         $parser = new ParseService();
         $parser->parse('./tests/data/multipleDiscount.jsonl');
@@ -32,14 +36,16 @@ class ParseServiceTest extends TestCase {
         $this->assertEquals($data, $checkData);
     }
 
-    public function testParseEmptyUrl() {
+    public function testParseEmptyUrl()
+    {
         $this->expectExceptionMessage('Filename cannot be empty');
         $this->expectError();
         $parser = new ParseService();
         $parser->parse('');
     }
 
-    public function testParseInvalidUrl() {
+    public function testParseInvalidUrl()
+    {
         $this->expectExceptionMessage('failed to open stream: No such file or directory');
         $this->expectError();
         $parser = new ParseService();

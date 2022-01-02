@@ -3,8 +3,10 @@
 use PHPUnit\Framework\TestCase;
 use Console\Classes\DiscountClass;
 
-class DiscountClassTest extends TestCase {
-    public function testDiscount() {
+class DiscountClassTest extends TestCase
+{
+    public function testDiscount()
+    {
         $discounts = file_get_contents('./tests/data/discounts.json');
         $items = file_get_contents('./tests/data/items.json');
         $discountClass = new DiscountClass(json_decode($items), json_decode($discounts));
@@ -12,14 +14,16 @@ class DiscountClassTest extends TestCase {
         $this->assertEquals(26.737437999999997, $discountedPrice);
     }
 
-    public function testNoItem() {
+    public function testNoItem()
+    {
         $discounts = file_get_contents('./tests/data/discounts.json');
         $discountClass = new DiscountClass(json_decode('[]'), json_decode($discounts));
         $discountedPrice = $discountClass->getDiscountPrice();
         $this->assertEquals(0, $discountedPrice);
     }
 
-    public function testNoDiscount() {
+    public function testNoDiscount()
+    {
         $items = file_get_contents('./tests/data/items.json');
         $discountClass = new DiscountClass(json_decode($items), json_decode('[]'));
         $discountedPrice = $discountClass->getDiscountPrice();
