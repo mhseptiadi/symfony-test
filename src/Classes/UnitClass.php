@@ -43,7 +43,7 @@ class UnitClass
         }
     }
 
-    function findDistinctUnitCount(): void {
+    private function findDistinctUnitCount(): void {
         $items = array_map( function( $item ) { return $item->product->product_id; }, $this->items );
         $uniqueItems = array_unique( $items );
         $this->distinct_unit_count = count($uniqueItems);

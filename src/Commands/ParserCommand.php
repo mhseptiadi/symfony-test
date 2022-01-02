@@ -32,8 +32,6 @@ class ParserCommand extends Command
         $parser = new ParseService();
         $parser->parse($url);
 
-//        ParseService::parse($url);
-
         return 0;
     }
 }

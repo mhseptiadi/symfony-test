@@ -19,6 +19,10 @@ class DiscountClass
             $this->price += $item->quantity * $item->unit_price;
         }
 
+        if ($this->price === 0) {
+            return $this->price;
+        }
+
         usort($this->discounts, array($this, 'priority'));
 
         $this->calculateDiscount($this->discounts);

@@ -15,7 +15,6 @@ class ParseService
     private function process($dataArr): void {
         $dataMapped = array_map(array($this, 'mapToOrder'), array_filter($dataArr));
         $this->toCsv($dataMapped);
-//        print_r(($dataMapped));
     }
 
     private function mapToOrder($data): OrderClass {

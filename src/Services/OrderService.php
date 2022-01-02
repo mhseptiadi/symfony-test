@@ -21,10 +21,6 @@ class OrderService
         return $this->order;
     }
 
-    public function getDataArray(): OrderClass {
-        return $this->order;
-    }
-
     private function map(): void {
         if (!$this->jsonObject) {
             return;
